@@ -20,15 +20,17 @@ function MainContainer() {
     ? stocks.filter((stock) => stock.type === filter)
     : stocks
 
-  const filteredAndSortedStocks = () => {
+  const sortStocks = (stocks) => {
     if (sort === "Alphabetically") {
-      return filteredStocks.sort((a, b) => a.name.localeCompare(b.name))
+      return stocks.sort((a, b) => a.name.localeCompare(b.name))
     } else if (sort === "Price") {
-      return filteredStocks.sort((a, b) => a.price - b.price)
+      return stocks.sort((a, b) => a.price - b.price)
     } else {
-      return filteredStocks
+      return stocks
     }
   }
+
+  const filteredAndSortedStocks = sortStocks(filteredStocks)
 
   const updatePortfolio = () => {
     if (!portfolio.includes(activeStock) && activeStock) {

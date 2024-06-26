@@ -16,6 +16,20 @@ function MainContainer() {
       .then((data) => setStocks(data))
   }, [])
 
+  const filteredStocks = filter
+    ? stocks.filter((stock) => stock.type === filter)
+    : stocks
+
+  const filteredAndSortedStocks = () => {
+    if (sort === "Alphabetically") {
+      return filteredStocks.sort((a, b) => a.name.localeCompare(b.name))
+    } else if (sort === "Price") {
+      return filteredStocks.sort((a, b) => a.price - b.price)
+    } else {
+      return filteredStocks
+    }
+  }
+
   const updatePortfolio = () => {
     if (!portfolio.includes(activeStock) && activeStock) {
       setPortfolio([...portfolio, activeStock])
@@ -37,10 +51,8 @@ function MainContainer() {
       <div className="row">
         <div className="col-8">
           <StockContainer
-            stocks={stocks}
+            stocks={filteredAndSortedStocks}
             setActiveStock={setActiveStock}
-            filter={filter}
-            sort={sort}
           />
         </div>
         <div className="col-4">

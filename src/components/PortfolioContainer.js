@@ -1,13 +1,13 @@
 import React from "react"
 import Stock from "./Stock"
 
-function PortfolioContainer({ portfolio, setActiveStock }) {
+function PortfolioContainer({ portfolio, changePortfolio }) {
   const displayPortfolio = () =>
     portfolio.map((stock) => (
       <Stock
         key={stock.id + 0.1}
         stock={stock}
-        setActiveStock={setActiveStock}
+        changePortfolio={changePortfolio}
       />
     ))
   return (

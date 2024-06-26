@@ -1,10 +1,10 @@
 import React from "react"
 
-function Stock({ stock, setActiveStock }) {
+function Stock({ stock, changePortfolio }) {
   const { name, price, ticker } = stock
 
   const handleClick = () => {
-    setActiveStock(stock)
+    changePortfolio(stock)
   }
   return (
     <div onClick={handleClick}>

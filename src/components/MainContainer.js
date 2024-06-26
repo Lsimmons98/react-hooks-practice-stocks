@@ -6,7 +6,6 @@ import SearchBar from "./SearchBar"
 function MainContainer() {
   const [stocks, setStocks] = useState(null)
   const [portfolio, setPortfolio] = useState([])
-  const [activeStock, setActiveStock] = useState(null)
   const [filter, setFilter] = useState(null)
   const [sort, setSort] = useState(null)
 
@@ -32,17 +31,15 @@ function MainContainer() {
 
   const filteredAndSortedStocks = sortStocks(filteredStocks)
 
-  const updatePortfolio = () => {
-    if (!portfolio.includes(activeStock) && activeStock) {
-      setPortfolio([...portfolio, activeStock])
-      setActiveStock(null)
-    } else if (portfolio.includes(activeStock) && activeStock) {
-      setPortfolio(portfolio.filter((stock) => stock !== activeStock))
-      setActiveStock(null)
-    }
+  const addStock = (stock) => {
+    if (!portfolio.includes(stock)) setPortfolio([...portfolio, stock])
   }
 
-  updatePortfolio()
+  const removeStock = (stock) => {
+    if (portfolio.includes(stock)) {
+      setPortfolio(portfolio.filter((item) => item !== stock))
+    }
+  }
 
   if (!stocks) {
     return "Loading..."
@@ -54,13 +51,13 @@ function MainContainer() {
         <div className="col-8">
           <StockContainer
             stocks={filteredAndSortedStocks}
-            setActiveStock={setActiveStock}
+            changePortfolio={addStock}
           />
         </div>
         <div className="col-4">
           <PortfolioContainer
             portfolio={portfolio}
-            setActiveStock={setActiveStock}
+            changePortfolio={removeStock}
           />
         </div>
       </div>

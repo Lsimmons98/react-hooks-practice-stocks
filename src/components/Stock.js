@@ -1,7 +1,7 @@
 import React from "react"
 
 function Stock({ stock, setActiveStock }) {
-  const { name, price } = stock
+  const { name, price, ticker } = stock
 
   const handleClick = () => {
     setActiveStock(stock)
@@ -11,7 +11,9 @@ function Stock({ stock, setActiveStock }) {
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
-          <p className="card-text">{price}</p>
+          <p className="card-text">
+            {ticker}: {price}
+          </p>
         </div>
       </div>
     </div>

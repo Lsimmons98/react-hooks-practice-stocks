@@ -1,40 +1,42 @@
-import React from "react";
+import React from "react"
 
-function SearchBar() {
+function SearchBar({ setFilter, setSort }) {
+  const handleFilter = (e) => {
+    setFilter(e.target.value)
+  }
+
+  const handleSort = (e) => {
+    setSort(e.target.value)
+  }
+
   return (
-    <div>
+    <div id="search">
       <strong>Sort by:</strong>
-      <label>
+      <label id="Alphabetically">
         <input
           type="radio"
           value="Alphabetically"
           name="sort"
-          checked={null}
-          onChange={null}
+          onChange={handleSort}
         />
         Alphabetically
       </label>
-      <label>
-        <input
-          type="radio"
-          value="Price"
-          name="sort"
-          checked={null}
-          onChange={null}
-        />
+      <label id="Price">
+        <input type="radio" value="Price" name="sort" onChange={handleSort} />
         Price
       </label>
       <br />
       <label>
         <strong>Filter:</strong>
-        <select onChange={null}>
+        <select id="filter" onChange={handleFilter}>
+          <option value="">All</option>
           <option value="Tech">Tech</option>
           <option value="Sportswear">Sportswear</option>
           <option value="Finance">Finance</option>
         </select>
       </label>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar
